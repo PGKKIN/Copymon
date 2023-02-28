@@ -1,7 +1,7 @@
 #include <iostream>
+using namespace std;
 
 int main(){
-
 	Unit poke1{"Charizard","Fire",200,200,50,50,false};
 	Unit poke2{"Blastoise","Water",200,200,25,75,false};
 	Unit poke3{"Venusaur","Grass",200,200,25,75,false};
