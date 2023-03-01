@@ -5,12 +5,12 @@ int main(){
 	Unit poke1{"Charizard","Fire",200,200,50,50,false};
 	Unit poke2{"Blastoise","Water",200,200,25,75,false};
 	Unit poke3{"Venusaur","Grass",200,200,25,75,false};
-	Unit poke4{"Snorlax","Normal",400,200,10,30,false};
-	Unit poke5{"Lucario","Fighting",175,200,75,50,false};
+	Unit poke4{"Snorlax","Normal",400,400,10,30,false};
+	Unit poke5{"Lucario","Fighting",175,175,75,50,false};
 	Unit poke6{"Gengar","Ghost",200,200,75,25,false};
 	Unit poke7{"Gardevoir","Fairy",200,200,75,25,false};
 	Unit poke8{"Garchomp","Dragon",200,200,50,50,false};
-	Unit poke9{"Abomasnow","Ice",300,200,30,30,false};
+	Unit poke9{"Abomasnow","Ice",300,300,30,30,false};
 	Unit poke10{"Absol","Dark",200,200,60,40,false};
 	player1_team[] = {poke1,poke2,poke3};
 	player2_team[] = {poke3,poke4,poke5};
