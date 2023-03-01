@@ -1,0 +1,142 @@
+#include <ncurses.h>
+#include <iostream>
+#include <vector>
+#include <string>
+
+using namespace std;
+
+int main() {
+    // Initialize ncurses
+    initscr();
+    cbreak();
+    noecho();
+    keypad(stdscr, true);
+
+    // Define menu options
+    vector<string> options = {"Start","Exit"};
+    vector<string> characters = {"Aonzaa","Programlnw","Winnie","Jonutkrub","Pondhodmak"};
+    vector<string> mode = {"Easy","Normal","Hard"};
+    int selected_option = 0;
+    int selected_character = 0;
+    int selected_mode = 0;
+
+    // Display menu and handle input
+    while (true) {
+        // Clear the screen
+        clear();
+        
+        // Print menu options
+        for (int i = 0; i < options.size(); i++) {
+            if (i == selected_option) {
+                attron(A_REVERSE);
+            }
+            printw("%s\n", options[i].c_str());
+            attroff(A_REVERSE);
+        }
+
+        // Get input from the user
+        int key = getch();
+
+        switch (key) {
+            case KEY_UP:
+                if (selected_option > 0) {
+                    selected_option--;
+                }
+                break;
+            case KEY_DOWN:
+                if (selected_option < options.size() - 1) {
+                    selected_option++;
+                }
+                break;
+            case '\n':
+                clear();
+             
+            if (selected_option == 0) {
+            printw("PLEASE SELECT YOUR CHARACTER:\n");
+            bool made_selection = false;
+            while (!made_selection) {
+                for (int i = 0; i < characters.size(); i++) {
+                    if (i == selected_character) {
+                        attron(A_REVERSE);
+                    }
+                printw("%s\n", characters[i].c_str());
+                    attroff(A_REVERSE);
+                    }
+
+                int key1 = getch();
+
+                    switch (key1) {
+                case KEY_UP:
+                    if (selected_character > 0) {
+                        selected_character--;
+                    }
+                break;
+                 case KEY_DOWN:
+                    if (selected_character < characters.size() - 1) {
+                        selected_character++;
+                    }
+                break;
+                case '\n':
+                    made_selection = true;
+                    clear();
+                break;
+        }
+        clear();
+        printw("PLEASE SELECT YOUR CHARACTER:\n");
+}
+        clear();
+            
+                printw("PLEASE SELECT MODE:\n");
+                made_selection = false;
+                while (!made_selection) {
+                    for (int i = 0; i < mode.size(); i++) {
+                        if (i == selected_mode) {
+                            attron(A_REVERSE);
+                        }
+                        printw("%s\n", mode[i].c_str());
+                            attroff(A_REVERSE);
+                        }
+
+                int key2 = getch();
+
+                switch (key2) {
+                case KEY_UP:
+                    if (selected_mode > 0) {
+                        selected_mode--;
+                    }
+                break;
+                case KEY_DOWN:
+                    if (selected_mode < mode.size() - 1) {
+                        selected_mode++;
+                    }
+                break;
+                case '\n':
+                    made_selection = true;
+                    clear();
+                break;
+                }
+        
+                    clear();
+                    printw("PLEASE SELECT MODE:\n");
+
+                }
+            
+                refresh();
+                clear();
+                    
+                    printw("Selected character: %s\n", characters[selected_character].c_str());
+                    printw("Selected mode: %s\n", mode[selected_mode].c_str());
+                    
+                    refresh();
+                    getch();
+                    break;
+            
+            }
+            if (selected_option == 1){
+                printw("Exit the game\n");
+            }
+                refresh();
+                return 0;
+        }
+    }
+}
