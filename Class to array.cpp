@@ -24,6 +24,7 @@ class Unit{
 		Unit(string,string,int,int,int);
 		vector<int> getSelect();
         vector<string> getSelect2();
+        void choose(Unit *);  
 };
 
 Unit::Unit(string x,string y,int a,int b,int c){
@@ -48,6 +49,11 @@ vector<int> Unit::getSelect(){
      return x;
 
 }
+
+// void Unit::choose(Unit *a){
+//     P1[1] +=  ;
+
+// }
 // void POKEMON::switchPosition(int a , int c[])
 // {
 //         for(int i = 0 ; i < 2 ;i++)
@@ -73,11 +79,9 @@ int main(){
 	Unit poke8 ("Garchomp","Dragon",200,50,50);
 	Unit poke9 ("Abomasnow","Ice",300,30,30);
 	Unit poke10 ("Absol","Dark",200,60,40);
-    
-    // double PM2.5[] = {} 
+
     choosePK P1 ;
     choosePK P2 ;
-
 
     // for(int i = 0 ; i < 3 ;i++){
     //     cout << "Please choose your pokemon " <<i+1 <<": " ;
@@ -86,7 +90,6 @@ int main(){
     // for(int i = 0 ; i < 3 ;i++){
     //     cout<< P1.P1[i] << " ";
     // }
-    // double Pokeall[10] = {poke1,poke2,poke3};
     // for(int i = 0 ; i < 3 ;i++){
     //     for(int j = 0 ; j < 2 ;j++){
     //     vector<string> stat = Pokeall[i].getSelect2();
@@ -98,8 +101,26 @@ int main(){
     //     }
 
     // }
-   vector<string> stat = poke.getSelect2();
-    cout << stat[0]<< " "<< stat[1];
+  
+    vector<Unit> player1_pokemon = {poke1, poke2, poke3};
+
+  
+    for(int i = 0 ; i < 3 ;i++){
+        for(int j = 0 ; j < 2 ;j++){
+        vector<string> stat = player1_pokemon[i].getSelect2();
+        cout << <<" " << stat[j]<< " ";
+        }
+        cout<<" ";
+        for(int k = 0 ; k < 3 ;k++){
+           vector<int> stat2 = player1_pokemon[i].getSelect();
+            cout << stat2[k]<< " "; 
+        }
+        cout<<endl;
+
+}
+
+
+
 
     
     
