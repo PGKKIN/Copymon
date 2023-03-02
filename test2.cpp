@@ -1,4 +1,3 @@
-// Online C++ compiler to run C++ program online
 #include<iostream>
 #include<string>
 #include<ctime>
@@ -9,7 +8,6 @@ using namespace std;
 
 class Unit{
         string type;
-        int hp;
         int hpmax;
         int atk;
         int def;
@@ -26,6 +24,7 @@ class Unit{
         bool protect_on;
     public:
         string name;
+        int hp;
         int spe;
         Unit(string,string,int,int,int,int,int,string,string,int,string,string,int,string,string,int,string,bool);
 		vector<int> getSelect();
@@ -303,15 +302,32 @@ void swpoP(int x,vector<Unit> a){
     }
     if(x==5) a[0].heal();
 }
-    // if(a[0].spe > b[0].spe){
-    //     a[0].attack(b[0],x);
-    //     if(b[0].hp!=0) b[0].attack(a[0],y);
-    //     }
-    // }
-    // else{
-    //     b[0].attack(a[0],y);
-    //     if(a[0].hp!=0) a[0].attack(b[0],x);
-    // }
+void speedf(int x,int y,vector<Unit> a,vector<Unit> b){
+    if(a[0].spe > b[0].spe){
+        a[0].attack(b[0],x);
+        if(b[0].hp!=0) b[0].attack(a[0],y);
+        // else if(b[0].hp==0){
+        //     P1_Team(b);
+        //     cout<<"---------------------------------------\n";
+        //     Switch(b); 
+        //     cout<<"---------------------------------------\n";
+        //     P1_Team(b);
+        //     cout<<"---------------------------------------\n";
+        // }
+        }
+    else{
+        b[0].attack(a[0],y);
+        if(a[0].hp!=0) a[0].attack(b[0],x);
+        // else if(a[0].hp==0){
+        //     P1_Team(a);
+        //     cout<<"---------------------------------------\n";
+        //     Switch(a); 
+        //     cout<<"---------------------------------------\n";
+        //     P1_Team(a);
+        //     cout<<"---------------------------------------\n";
+        // }
+    }
+}
 
 int main(){  
     Unit poke1 ("Charizard","Fire",200,50,50,100,200,"Daimonji","Fire",75,"DragonClaw","Dragon",50,"BrickBreak","Fighting",50,"Protect",false);
@@ -391,5 +407,6 @@ int main(){
 	    else if(player2_action == 'S') num2 = 0;
 	    swpoP(num1,selected_pokemon1);
 	    swpoP(num2,selected_pokemon2);
+	    
 }
 }
