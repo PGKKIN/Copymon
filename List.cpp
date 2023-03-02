@@ -21,7 +21,7 @@ class Unit{
 		Unit(string,string,int,int,int);
 		vector<int> getSelect();
         vector<string> getSelect2();
-        void choose(Unit *);  
+        
 };
 
 Unit::Unit(string x,string y,int a,int b,int c){
@@ -47,6 +47,97 @@ vector<int> Unit::getSelect(){
 
 }
 
+void ChoosePokemon(vector<Unit> &y,string x[],Unit a,Unit b,Unit c,Unit d,Unit e,Unit f,Unit g,Unit h,Unit i,Unit j){
+    cout<<"-----Choose your first pokemon----- " <<endl;
+    cout<<"Input Number to choose : ";
+    while (y.size() < 3) {
+        int pokemonIndex;
+        cin >> pokemonIndex;
+
+    bool alreadyChosen = false;
+    for (int i = 0; i < y.size(); i++) {
+        if (y[i].name == x[pokemonIndex-1]) {
+            alreadyChosen = true;
+            break;
+        }
+    }
+    if (alreadyChosen) {
+        cout << "That Pokemon has already been selected. Please choose a different one." << endl ;
+        cout << "Please select your next Pokemon agian: " ;
+        continue;
+    }
+        switch (pokemonIndex) {
+        case 1:
+            y.push_back(a);
+            break;
+        case 2:
+            y.push_back(b);
+            break;
+        case 3:
+            y.push_back(c);
+            break;
+        case 4:
+            y.push_back(d);
+            break;
+        case 5:
+            y.push_back(e);
+            break;
+        case 6:
+            y.push_back(f);
+            break;
+        case 7:
+            y.push_back(g);
+            break;
+        case 8:
+            y.push_back(h);
+            break;
+        case 9:
+            y.push_back(i);
+            break;
+        case 10:
+            y.push_back(j);
+            break;
+        
+        default:
+            cout << "Invalid Pokemon selection. Please choose a valid option." << endl;
+            continue;
+    }
+//     if (y.size() < 3) {
+//         cout << "Please select your next Pokemon: " ;
+//     } else {
+//         break;
+//     }
+    
+//    }
+//    cout << "-----You have selected the following Pokemon----- " << endl;
+//         for (int i = 0; i < y.size(); i++) {
+//    cout <<i+1 <<"."<< y[i].name<< endl;
+    }
+}
+
+void P1_Team(vector<Unit> &x){
+    cout<<"Your first Pokemon : " <<"1." <<x[0].name <<endl;
+    cout<<"Your Other Pokemon : " ;
+    for(int i = 0 ; i < 3 ; i++){
+        if(x[i].name != x[0].name){
+            cout<<i+1<<"." <<x[i].name <<" ";
+        }
+   }
+   cout<<endl;
+}
+
+void Switch(vector<Unit> &x){
+    cout<<"Switch The First Pokemon : "  ;
+    int Switch_Number ;
+    cin >> Switch_Number ;
+    string temp = x[0].name ;
+    x[0].name = x[Switch_Number-1].name ;
+    x[Switch_Number-1].name = temp;
+    
+    
+
+}
+
 int main(){ 
     Unit poke1 ("Charizard","Fire",200,50,50);
 	Unit poke2 ("Blastoise","Water",200,25,75);
@@ -59,7 +150,7 @@ int main(){
 	Unit poke9 ("Abomasnow","Ice",300,30,30);
 	Unit poke10 ("Absol","Dark",200,60,40);
     string pokemonNames[] = {"Charizard","Blastoise","Venusaur","Snorlax","Lucario","Gengar","Gardevoir","Garchomp","Abomasnow","Absol",};
-    vector<Unit> selected_pokemon1;
+    
     cout<<"---------------------------------------\n";//แสดง list pokemon
     vector<Unit> player1_pokemon = {poke1, poke2, poke3};
     vector<Unit> allpoke = {poke1, poke2, poke3,poke4,poke5,poke6,poke7,poke8,poke9,poke10};
@@ -78,118 +169,27 @@ int main(){
     }
     cout<<"---------------------------------------\n";//เลือกโปรแกมอน
 
-    cout<<"Input Number to choose : ";
     ////////////////////////////////////////////////////
     vector<Unit> selected_pokemon1; //Arrey โปเกมอน;
     ////////////////////////////////////////////////////
-
-   while (selected_pokemon1.size() < 3) {
-    int pokemonIndex;
-    cin >> pokemonIndex;
-
-    bool alreadyChosen = false;
-    for (int i = 0; i < selected_pokemon1.size(); i++) {
-        if (selected_pokemon1[i].name == pokemonNames[pokemonIndex-1]) {
-            alreadyChosen = true;
-            break;
-        }
-    }
-    if (alreadyChosen) {
-        cout << "That Pokemon has already been selected. Please choose a different one." << endl ;
-        cout << "Please select your next Pokemon agian: " ;
-        continue;
-    }
+    ChoosePokemon(selected_pokemon1,pokemonNames,poke1,poke2,poke3,poke4,poke5,poke6,poke7,poke8,poke9,poke10);
     
-        switch (pokemonIndex) {
-        case 1:
-            selected_pokemon1.push_back(poke1);
-            break;
-        case 2:
-            selected_pokemon1.push_back(poke2);
-            break;
-        case 3:
-            selected_pokemon1.push_back(poke3);
-            break;
-        case 4:
-            selected_pokemon1.push_back(poke4);
-            break;
-        case 5:
-            selected_pokemon1.push_back(poke5);
-            break;
-        case 6:
-            selected_pokemon1.push_back(poke6);
-            break;
-        case 7:
-            selected_pokemon1.push_back(poke7);
-            break;
-        case 8:
-            selected_pokemon1.push_back(poke8);
-            break;
-        case 9:
-            selected_pokemon1.push_back(poke9);
-            break;
-        case 10:
-            selected_pokemon1.push_back(poke10);
-            break;
-        
-        default:
-            cout << "Invalid Pokemon selection. Please choose a valid option." << endl;
-            continue;
-    }
-    if (selected_pokemon1.size() < 3) {
-        cout << "Please select your next Pokemon: " ;
-    } else {
-        break;
-    }
-   }
+    cout<<"---------------------------------------\n";
 
-   cout<<"---------------------------------------\n";//แสดงโปรแกมอน
-   cout << "You have selected the following Pokemon: " << endl;
-        for (int i = 0; i < selected_pokemon1.size(); i++) {
-   cout <<i+1 <<"."<< selected_pokemon1[i].name<< endl;
-    }
-   
-   cout<<"---------------------------------------\n"; // เลือกโปรแกม่อนตัวแรก
-   cout<<"Choose your first Pokemon : ";
-   int c ;
-   cin >> c ;
+    P1_Team(selected_pokemon1);
+    cout<<"---------------------------------------\n";
+    Switch(selected_pokemon1); 
+    cout<<"---------------------------------------\n";
+    P1_Team(selected_pokemon1);
+    cout<<"---------------------------------------\n";
+    Switch(selected_pokemon1); 
+    cout<<"---------------------------------------\n";
+    P1_Team(selected_pokemon1);
 
-   cout<<"Your first Pokemon : " <<"1." <<selected_pokemon1[c-1].name <<endl;
-   cout<<"Your Other Pokemon : " ;
-   for(int i = 0 ; i < 3 ; i++){
-        
-        if(i != c-1){
-            
-           cout<<"."<<selected_pokemon1[i].name <<" ";
-           
-        }
-        
-   }
-   cout<<"---------------------------------------\n";
-    
-    cout<<"Switch The First Pokemon : "  ;
-    int s ;
-    cin >> s ;
-    for(int j = 0 ; j < 3 ; j++){
-        if(s == c-1){
-            cout<<"Agian" ;
-            continue;
-        }if(s != c-1){
-            c = s ;
-            break;
-        }
-    }
-    cout<<"Your first Pokemon : " <<"1." <<selected_pokemon1[c-1].name <<endl;
-    cout<<"Your Other Pokemon : " ;
-    for(int i = 0 ; i < 3 ; i++){
+  
 
-        if(i != c-1){
-           cout<<"."<<selected_pokemon1[i].name <<" ";
-           
-        }
-   }
 
-   //j
+
 
 
    
