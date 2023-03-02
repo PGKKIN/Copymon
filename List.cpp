@@ -127,12 +127,15 @@ void P1_Team(vector<Unit> &x){
 }
 
 void Switch(vector<Unit> &x){
-    cout<<"Switch The Current Pokemon : "  ;
+    cout<<"Switch The First Pokemon : "  ;
     int Switch_Number ;
     cin >> Switch_Number ;
-    Unit temp = x[0] ;
-    x[0] = x[Switch_Number-1] ;
-    x[Switch_Number-1] = temp;
+    string temp = x[0].name ;
+    x[0].name = x[Switch_Number-1].name ;
+    x[Switch_Number-1].name = temp;
+    
+    
+
 }
 
 int main(){ 
