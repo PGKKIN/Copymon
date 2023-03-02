@@ -14,12 +14,14 @@ int main() {
 
     // Define menu options
     vector<string> options = {"Start","Exit"};
-    vector<string> characters = {"Aonzaa","Programlnw","Winnie","Jonutkrub","Pondhodmak"};
-    vector<string> mode = {"Easy","Normal","Hard"};
+    vector<string> characters = {"Charizard","Blastoise","Venusaur","Snorlax","Lucario","Gengar","Gardevoir","Garchomp","Abomasnow","Absol"};
+    vector<string> characters2 = {"Charizard","Blastoise","Venusaur","Snorlax","Lucario","Gengar","Gardevoir","Garchomp","Abomasnow","Absol"};
+    vector<string> characters3 = {"Charizard","Blastoise","Venusaur","Snorlax","Lucario","Gengar","Gardevoir","Garchomp","Abomasnow","Absol"};
     int selected_option = 0;
     int selected_character = 0;
-    int selected_mode = 0;
-
+    int selected_character2 = 0;
+    int selected_character3 = 0;
+    int pokemonIndex = 0;
     // Display menu and handle input
     while (true) {
         // Clear the screen
@@ -50,9 +52,10 @@ int main() {
                 break;
             case '\n':
                 clear();
-             
+            // Condition start    
             if (selected_option == 0) {
-            printw("PLEASE SELECT YOUR CHARACTER:\n");
+            // Select first character
+            printw("PLEASE SELECT YOUR FIRST CHARACTER:\n");
             bool made_selection = false;
             while (!made_selection) {
                 for (int i = 0; i < characters.size(); i++) {
@@ -69,11 +72,13 @@ int main() {
                 case KEY_UP:
                     if (selected_character > 0) {
                         selected_character--;
+                        pokemonIndex--;
                     }
                 break;
                  case KEY_DOWN:
                     if (selected_character < characters.size() - 1) {
                         selected_character++;
+                        pokemonIndex++;
                     }
                 break;
                 case '\n':
@@ -81,19 +86,24 @@ int main() {
                     clear();
                 break;
         }
+        
         clear();
-        printw("PLEASE SELECT YOUR CHARACTER:\n");
-}
+        printw("PLEASE SELECT YOUR FIRST CHARACTER:\n");
+
+        }
+        
         clear();
-            
-                printw("PLEASE SELECT MODE:\n");
+                pokemonIndex = 0;
+                // Select second character
+                printw("PLEASE SELECT YOUR SECOND CHARACTER:\n");
                 made_selection = false;
                 while (!made_selection) {
-                    for (int i = 0; i < mode.size(); i++) {
-                        if (i == selected_mode) {
+                    for (int i = 0; i < characters2.size(); i++) {
+                        if (i == selected_character2) {
+                            
                             attron(A_REVERSE);
                         }
-                        printw("%s\n", mode[i].c_str());
+                        printw("%s\n", characters2[i].c_str());
                             attroff(A_REVERSE);
                         }
 
@@ -101,37 +111,86 @@ int main() {
 
                 switch (key2) {
                 case KEY_UP:
-                    if (selected_mode > 0) {
-                        selected_mode--;
+                    if (selected_character2 > 0) {
+                        selected_character2--;
+                        pokemonIndex--;
                     }
                 break;
                 case KEY_DOWN:
-                    if (selected_mode < mode.size() - 1) {
-                        selected_mode++;
+                    if (selected_character2 < characters2.size() - 1) {
+                        selected_character2++;
+                        pokemonIndex++;
                     }
                 break;
                 case '\n':
                     made_selection = true;
                     clear();
+                    
                 break;
                 }
         
                     clear();
-                    printw("PLEASE SELECT MODE:\n");
+                    printw("PLEASE SELECT YOUR SECOND CHARACTER:\n");
 
                 }
             
-                refresh();
                 clear();
+                
+                pokemonIndex = 0;
+                // Select third character    
+                printw("PLEASE SELECT YOUR THIRD CHARACTER:\n");
+                made_selection = false;
+                    while (!made_selection) {
+                    for (int i = 0; i < characters3.size(); i++) {
+                        if (i == selected_character3) {
+                            attron(A_REVERSE);
+                        }
+                        printw("%s\n", characters3[i].c_str());
+                            attroff(A_REVERSE);
+                        }
+                        
+                        int key3 = getch();
+
+                        switch (key3) {
+                    case KEY_UP:
+                        if (selected_character3 > 0) {
+                            selected_character3--;
+                            pokemonIndex--;
+                        }
+                    break;
+                    case KEY_DOWN:
+                        if (selected_character3 < characters3.size() - 1) {
+                            selected_character3++;
+                            pokemonIndex++;
+                        }
+                    break;
+                    case '\n':
+                        
+                        made_selection = true;
+                        clear();
+                        break;
+                    }
                     
-                    printw("Selected character: %s\n", characters[selected_character].c_str());
-                    printw("Selected mode: %s\n", mode[selected_mode].c_str());
+                    clear();
+                    printw("PLEASE SELECT YOUR THIRD CHARACTER:\n");
+                    
+                    }
+                    
+                    refresh();
+                    clear();
+                    
+                    pokemonIndex = 0;
+                // Show result
+                    printw("Selected first character: %s %s\n", characters[selected_character].c_str(), characters[pokemonIndex].c_str());
+                    printw("Selected second character: %s %s\n", characters2[selected_character2].c_str(), characters2[pokemonIndex].c_str());
+                    printw("Selected third character: %s %s\n", characters3[selected_character3].c_str(), characters3[pokemonIndex].c_str());
                     
                     refresh();
                     getch();
                     break;
             
             }
+            // Condition exit
             if (selected_option == 1){
                 printw("Exit the game\n");
             }
