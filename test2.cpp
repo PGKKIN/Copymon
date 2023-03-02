@@ -292,6 +292,26 @@ void showpk(vector<Unit> x){
         cout<<endl;
     }
 }
+void swpoP(int x,vector<Unit> a){
+    if(x==0){
+        P1_Team(a);
+        cout<<"---------------------------------------\n";
+        Switch(a); 
+        cout<<"---------------------------------------\n";
+        P1_Team(a);
+        cout<<"---------------------------------------\n";
+    }
+    if(x==5) a[0].heal();
+}
+    // if(a[0].spe > b[0].spe){
+    //     a[0].attack(b[0],x);
+    //     if(b[0].hp!=0) b[0].attack(a[0],y);
+    //     }
+    // }
+    // else{
+    //     b[0].attack(a[0],y);
+    //     if(a[0].hp!=0) a[0].attack(b[0],x);
+    // }
 
 int main(){  
     Unit poke1 ("Charizard","Fire",200,50,50,100,200,"Daimonji","Fire",75,"DragonClaw","Dragon",50,"BrickBreak","Fighting",50,"Protect",false);
@@ -348,12 +368,7 @@ int main(){
 		}
 	    else if(player1_action=='H') selected_pokemon1[0].heal();
 	    else if(player1_action == 'S'){
-	        P1_Team(selected_pokemon1);
-            cout<<"---------------------------------------\n";
-            Switch(selected_pokemon1); 
-            cout<<"---------------------------------------\n";
-            P1_Team(selected_pokemon1);
-            cout<<"---------------------------------------\n";
+	        
 	    }
 	   cout<<"['F' Fight] ['S' Switch] ['H' Heal] What will Player2 do?  ";
 		cin>> player2_action;
@@ -371,16 +386,10 @@ int main(){
             cout<<endl; 
             cout<<"What move will your Copymon use? ";
             cin>>num2;
-            //if(num == 1) selected_pokemon1[0].();
 		}
-	    else if(player2_action=='H') selected_pokemon2[0].heal();
-	    else if(player2_action == 'S'){
-	        P1_Team(selected_pokemon2);
-            cout<<"---------------------------------------\n";
-            Switch(selected_pokemon2); 
-            cout<<"---------------------------------------\n";
-            P1_Team(selected_pokemon2);
-            cout<<"---------------------------------------\n";
-	    }
-	}
+	    else if(player2_action=='H') num2=5;
+	    else if(player2_action == 'S') num2 = 0;
+	    swpoP(num1,selected_pokemon1);
+	    swpoP(num2,selected_pokemon2);
+}
 }
