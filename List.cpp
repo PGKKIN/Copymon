@@ -46,9 +46,6 @@ vector<int> Unit::getSelect(){
      return x;
 
 }
-void choosePokemon(){
-    vector<Unit> selected_pokemon1;
-}
 
 int main(){ 
     Unit poke1 ("Charizard","Fire",200,50,50);
@@ -62,7 +59,7 @@ int main(){
 	Unit poke9 ("Abomasnow","Ice",300,30,30);
 	Unit poke10 ("Absol","Dark",200,60,40);
     string pokemonNames[] = {"Charizard","Blastoise","Venusaur","Snorlax","Lucario","Gengar","Gardevoir","Garchomp","Abomasnow","Absol",};
-    
+    vector<Unit> selected_pokemon1;
     cout<<"---------------------------------------\n";//แสดง list pokemon
     vector<Unit> player1_pokemon = {poke1, poke2, poke3};
     vector<Unit> allpoke = {poke1, poke2, poke3,poke4,poke5,poke6,poke7,poke8,poke9,poke10};
