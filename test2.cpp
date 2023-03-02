@@ -33,7 +33,8 @@ class Unit{
         vector<string> getSelect3();
         vector<int> getSelect4();
         void choose(Unit *);
-		void showStatus();
+		void showStatusforP1();
+		void showStatusforP2();
 		void newTurn();
 		int attack(Unit &,int);
 		int beAttacked(int,string,int);
@@ -172,6 +173,18 @@ int Unit::heal(){
 	hp = hp + h;
 	return h;
 }	
+void Unit::showStatusforP1(){
+		cout << "Player1--------------------------------\n"; 
+		cout << name << "\n"; 
+		cout << "HP: " << hp << "/" << hpmax << "\tATK: "<< atk << "\t\tDEF: "<< def;		
+		cout << "\n---------------------------------------\n";
+    }
+void Unit::showStatusforP2(){
+		cout << "\t\t\t\tPlayer2--------------------------------\n"; 
+		cout << "\t\t\t\t" << name << "\n"; 
+		cout << "\t\t\t\tHP: " << hp << "/" << hpmax<< "\t\tATK: "<< atk << "\t\tDEF: "<< def;
+		cout << "\n\t\t\t\t---------------------------------------\n";
+	}
 void ChoosePokemon(vector<Unit> &y,string x[],Unit a,Unit b,Unit c,Unit d,Unit e,Unit f,Unit g,Unit h,Unit i,Unit j){
     cout<<"-----Choose your first pokemon----- " <<endl;
     cout<<"Input Number to choose : ";
@@ -297,29 +310,25 @@ int main(){
     ////////////////////////////////////////////////////
     vector<Unit> selected_pokemon1; //Arrey โปเกมอน;
     vector<Unit> selected_pokemon2; //Arrey โปเกมอน
-    bool sd=true;
+    int sd=1;
+    showpk(allpoke);
     ////////////////////////////////////////////////////
-    if(sd){
-        showpk(allpoke);
         cout<<"---------------------------------------\n";//เลือกโปร
         cout<<"Player_1 Team Selection\n";
         ChoosePokemon(selected_pokemon1,pokemonNames,poke1,poke2,poke3,poke4,poke5,poke6,poke7,poke8,poke9,poke10);
-        cout<<"---------------------------------------\n";//เลือกโปร
-        sd = false;
-    }
-    else {
-        showpk(allpoke);
         cout<<"---------------------------------------\n";//เลือกโ
+        cout<<"Player_2 Team Selection\n";
         ChoosePokemon(selected_pokemon2,pokemonNames,poke1,poke2,poke3,poke4,poke5,poke6,poke7,poke8,poke9,poke10);
         cout<<"---------------------------------------\n";//เลือกโปรแกมอน
-    }
     while(true){
-		char player_action;
+        selected_pokemon2[0].showStatusforP2();
+        selected_pokemon1[0].showStatusforP1();
+		char player1_action;
 		int num;
-		cout<<"['F' Fight] ['S' Switch] ['H' Heal] What will you do?  ";
-		cin>> player_action;
-		player_action = toupper(player_action);
-		if(player_action=='F'){
+		cout<<"['F' Fight] ['S' Switch] ['H' Heal] What will Player1 do?  ";
+		cin>> player1_action;
+		player1_action = toupper(player1_action);
+		if(player1_action=='F'){
 		    int i = 0;
 			for(int l = 0 ; l < 7 ;l+=2){
 				vector<string> stat3 = selected_pokemon1[0].getSelect3();
@@ -334,8 +343,8 @@ int main(){
             cin>>num;
             //if(num == 1) selected_pokemon1[0].();
 		}
-	    else if(player_action=='H') selected_pokemon1[0].heal();
-	    else if(player_action == 'S'){
+	    else if(player1_action=='H') selected_pokemon1[0].heal();
+	    else if(player1_action == 'S'){
 	        P1_Team(selected_pokemon1);
             cout<<"---------------------------------------\n";
             Switch(selected_pokemon1); 
