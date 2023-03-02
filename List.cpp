@@ -46,6 +46,9 @@ vector<int> Unit::getSelect(){
      return x;
 
 }
+void choosePokemon(){
+    vector<Unit> selected_pokemon1;
+}
 
 int main(){ 
     Unit poke1 ("Charizard","Fire",200,50,50);
@@ -157,11 +160,16 @@ int main(){
    cout<<"Your first Pokemon : " <<"1." <<selected_pokemon1[c-1].name <<endl;
    cout<<"Your Other Pokemon : " ;
    for(int i = 0 ; i < 3 ; i++){
+        
         if(i != c-1){
-           cout<<i+1 <<"."<<selected_pokemon1[i].name <<" ";
+            
+           cout<<"."<<selected_pokemon1[i].name <<" ";
+           
         }
+        
    }
-    cout<<"---------------------------------------\n";
+   cout<<"---------------------------------------\n";
+    
     cout<<"Switch The First Pokemon : "  ;
     int s ;
     cin >> s ;
@@ -170,10 +178,19 @@ int main(){
             cout<<"Agian" ;
             continue;
         }if(s != c-1){
-            cout<<selected_pokemon1[s-1].name;
+            c = s ;
             break;
         }
     }
+    cout<<"Your first Pokemon : " <<"1." <<selected_pokemon1[c-1].name <<endl;
+    cout<<"Your Other Pokemon : " ;
+    for(int i = 0 ; i < 3 ; i++){
+
+        if(i != c-1){
+           cout<<"."<<selected_pokemon1[i].name <<" ";
+           
+        }
+   }
 
    //j
 
