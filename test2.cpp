@@ -325,7 +325,9 @@ int main(){
         selected_pokemon2[0].showStatusforP2();
         selected_pokemon1[0].showStatusforP1();
 		char player1_action;
-		int num;
+		char player2_action;
+		int num1;
+		int num2;
 		cout<<"['F' Fight] ['S' Switch] ['H' Heal] What will Player1 do?  ";
 		cin>> player1_action;
 		player1_action = toupper(player1_action);
@@ -341,7 +343,7 @@ int main(){
             }
             cout<<endl; 
             cout<<"What move will your Copymon use? ";
-            cin>>num;
+            cin>>num1;
             //if(num == 1) selected_pokemon1[0].();
 		}
 	    else if(player1_action=='H') selected_pokemon1[0].heal();
@@ -351,6 +353,33 @@ int main(){
             Switch(selected_pokemon1); 
             cout<<"---------------------------------------\n";
             P1_Team(selected_pokemon1);
+            cout<<"---------------------------------------\n";
+	    }
+	   cout<<"['F' Fight] ['S' Switch] ['H' Heal] What will Player2 do?  ";
+		cin>> player2_action;
+		player2_action = toupper(player2_action);
+		if(player2_action=='F'){
+		    int i = 0;
+			for(int l = 0 ; l < 7 ;l+=2){
+				vector<string> stat3 = selected_pokemon2[0].getSelect3();
+				cout <<i+1 <<"."<< stat3[l];
+				vector<int> stat4 = selected_pokemon2[0].getSelect4();
+				if(l<6) cout<<" MoveDamage:"<<stat4[i];
+				if(l<6) cout<<" Type:"<<stat3[l+1]<<"\n";
+				i++;
+            }
+            cout<<endl; 
+            cout<<"What move will your Copymon use? ";
+            cin>>num2;
+            //if(num == 1) selected_pokemon1[0].();
+		}
+	    else if(player2_action=='H') selected_pokemon2[0].heal();
+	    else if(player2_action == 'S'){
+	        P1_Team(selected_pokemon2);
+            cout<<"---------------------------------------\n";
+            Switch(selected_pokemon2); 
+            cout<<"---------------------------------------\n";
+            P1_Team(selected_pokemon2);
             cout<<"---------------------------------------\n";
 	    }
 	}
