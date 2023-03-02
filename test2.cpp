@@ -27,7 +27,7 @@ class Unit{
     public:
         string name;
         int spe;
-        Unit(string,string,int,int,int,int,string,string,int,string,string,int,string,string,int,string,bool);
+        Unit(string,string,int,int,int,int,int,string,string,int,string,string,int,string,string,int,string,bool);
 		vector<int> getSelect();
         vector<string> getSelect2();
         vector<string> getSelect3();
@@ -115,13 +115,14 @@ int Unit::attack(Unit &x,int y){
     else if(y==2) return x.beAttacked(atk,move2type,move2atk);
     else if(y==3) return x.beAttacked(atk,move3type,move3atk); 
 }
-Unit::Unit(string a,string b,int c,int d,int e,int q,string f,string g,int h,string i,string j,int k,string l,string m,int n,string o,bool p){
+Unit::Unit(string a,string b,int c,int d,int e,int q,int r,string f,string g,int h,string i,string j,int k,string l,string m,int n,string o,bool p){
     name = a;
     type = b;
     hpmax = c;
     atk = d;
     def = e;
     spe = q;
+    hp = r;
     move1 =f;
     move1type =g;
     move1atk =h;
@@ -293,16 +294,16 @@ void showpk(vector<Unit> x){
 }
 
 int main(){  
-    Unit poke1 ("Charizard","Fire",200,50,50,100,"Daimonji","Fire",75,"DragonClaw","Dragon",50,"BrickBreak","Fighting",50,"Protect",false);
-	Unit poke2 ("Blastoise","Water",200,25,75,78,"HydroPump","Water",75,"DarkPaluse","Dark",50,"IceBeam","Ice",50,"Protect",false);
-	Unit poke3 ("Venusaur","Grass",200,25,75,80,"SolarBeam","Grass",75,"SeedBomb","Grass",65,"Doube-Edge","Normal",60,"Protect",false);
-	Unit poke4 ("Snorlax","Normal",400,10,30,30,"HyperBeam","Normal",90,"Crunch","Dark",50,"HammerArm","Fighting",50,"Protect",false);
-	Unit poke5 ("Lucario","Fighting",175,75,50,90,"CloseCombat","Fighting",75,"DragonPaluse","Dragon",50,"ExtreamSpeed","Normal",60,"Protect",false);
-	Unit poke6 ("Gengar","Ghost",200,75,25,110,"DestinyBond","Ghost",75,"SukerPunch","Dark",50,"FirePunch","Fire",50,"Protect",false);
-	Unit poke7 ("Gardevoir","Fairy",200,75,25,85,"Moonblast","Fairy",75,"MysticalFire","Fire",50,"GrassKnot","Grass",50,"Protect",false);
-	Unit poke8 ("Garchomp","Dragon",200,50,50,102,"DragonRush","Dragon",75,"BrickBreak","Fighting",50,"FireFang","Fire",50,"Protect",false);
-	Unit poke9 ("Abomasnow","Ice",300,30,30,60,"Blizzard","Ice",75,"WoodHammer","Grass",60,"IcePunch","Ice",50,"Protect",false);
-	Unit poke10 ("Absol","Dark",200,60,40,75,"NightSlash","Dark",75,"Curse","Ghost",50,"RockSmash","Fighting",50,"Protect",false);
+    Unit poke1 ("Charizard","Fire",200,50,50,100,200,"Daimonji","Fire",75,"DragonClaw","Dragon",50,"BrickBreak","Fighting",50,"Protect",false);
+	Unit poke2 ("Blastoise","Water",200,25,75,78,200,"HydroPump","Water",75,"DarkPaluse","Dark",50,"IceBeam","Ice",50,"Protect",false);
+	Unit poke3 ("Venusaur","Grass",200,25,75,80,200,"SolarBeam","Grass",75,"SeedBomb","Grass",65,"Doube-Edge","Normal",60,"Protect",false);
+	Unit poke4 ("Snorlax","Normal",400,10,30,30,400,"HyperBeam","Normal",90,"Crunch","Dark",50,"HammerArm","Fighting",50,"Protect",false);
+	Unit poke5 ("Lucario","Fighting",175,75,50,90,175,"CloseCombat","Fighting",75,"DragonPaluse","Dragon",50,"ExtreamSpeed","Normal",60,"Protect",false);
+	Unit poke6 ("Gengar","Ghost",200,75,25,110,200,"DestinyBond","Ghost",75,"SukerPunch","Dark",50,"FirePunch","Fire",50,"Protect",false);
+	Unit poke7 ("Gardevoir","Fairy",200,75,25,85,200,"Moonblast","Fairy",75,"MysticalFire","Fire",50,"GrassKnot","Grass",50,"Protect",false);
+	Unit poke8 ("Garchomp","Dragon",200,50,50,102,200,"DragonRush","Dragon",75,"BrickBreak","Fighting",50,"FireFang","Fire",50,"Protect",false);
+	Unit poke9 ("Abomasnow","Ice",300,30,30,60,300,"Blizzard","Ice",75,"WoodHammer","Grass",60,"IcePunch","Ice",50,"Protect",false);
+	Unit poke10 ("Absol","Dark",200,60,40,75,200,"NightSlash","Dark",75,"Curse","Ghost",50,"RockSmash","Fighting",50,"Protect",false);
 
     vector<Unit> player1_pokemon = {poke1, poke2, poke3};
     vector<Unit> allpoke = {poke1, poke2, poke3,poke4,poke5,poke6,poke7,poke8,poke9,poke10};
