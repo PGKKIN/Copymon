@@ -32,15 +32,15 @@ class Unit{
         vector<string> getSelect3();
         vector<int> getSelect4();
         void choose(Unit *);
-		void showStatusforP1();
-		void showStatusforP2();
+		void showStatusforP1(vector<Unit> &);
+		void showStatusforP2(vector<Unit> &);
 		void newTurn();
-		int attack(Unit &,int);
-		int beAttacked(int,string,int);
+		int attack(Unit &,int,vector<Unit>);
+		int beAttacked(int,string,int,vector<Unit> &);
 		int heal();	
 		bool isDead();
 };
-int Unit::beAttacked(int oppatk,string movetype,int moveatk){
+int Unit::beAttacked(int oppatk,string movetype,int moveatk,vector<Unit> &x){
     double dmg;
     if(protect_on) dmg = 0;
     else{
@@ -104,15 +104,15 @@ int Unit::beAttacked(int oppatk,string movetype,int moveatk){
         }
     }
     
-    hp -= dmg;
-	if(hp <= 0) hp = 0;
+    x[0].hp =x[0].hp- dmg;
+	if(x[0].hp <= 0) x[0].hp = 0;
 	
 	return dmg;	
 }
-int Unit::attack(Unit &x,int y){
-    if(y==1) return x.beAttacked(atk,move1type,move1atk);
-    else if(y==2) return x.beAttacked(atk,move2type,move2atk);
-    else if(y==3) return x.beAttacked(atk,move3type,move3atk); 
+int Unit::attack(Unit &x,int y,vector<Unit> z){
+    if(y==1) return x.beAttacked(atk,move1type,move1atk,z);
+    else if(y==2) return x.beAttacked(atk,move2type,move2atk,z);
+    else if(y==3) return x.beAttacked(atk,move3type,move3atk,z); 
 }
 Unit::Unit(string a,string b,int c,int d,int e,int q,int r,string f,string g,int h,string i,string j,int k,string l,string m,int n,string o,bool p){
     name = a;
@@ -173,16 +173,16 @@ int Unit::heal(){
 	hp = hp + h;
 	return h;
 }	
-void Unit::showStatusforP1(){
+void Unit::showStatusforP1(vector<Unit> &x){
 		cout << "Player1--------------------------------\n"; 
 		cout << name << "\n"; 
-		cout << "HP: " << hp << "/" << hpmax << "\tATK: "<< atk << "\t\tDEF: "<< def;		
+		cout << "HP: " << x[0].hp << "/" << hpmax << "\tATK: "<< atk << "\t\tDEF: "<< def;		
 		cout << "\n---------------------------------------\n";
     }
-void Unit::showStatusforP2(){
+void Unit::showStatusforP2(vector<Unit> &x){
 		cout << "\t\t\t\tPlayer2--------------------------------\n"; 
 		cout << "\t\t\t\t" << name << "\n"; 
-		cout << "\t\t\t\tHP: " << hp << "/" << hpmax<< "\t\tATK: "<< atk << "\t\tDEF: "<< def;
+		cout << "\t\t\t\tHP: " << x[0].hp << "/" << hpmax<< "\t\tATK: "<< atk << "\t\tDEF: "<< def;
 		cout << "\n\t\t\t\t---------------------------------------\n";
 	}
 void ChoosePokemon(vector<Unit> &y,string x[],Unit a,Unit b,Unit c,Unit d,Unit e,Unit f,Unit g,Unit h,Unit i,Unit j){
@@ -304,8 +304,11 @@ void swpoP(int x,vector<Unit> a){
 }
 void speedf(int x,int y,vector<Unit> a,vector<Unit> b){
     if(a[0].spe > b[0].spe){
-        a[0].attack(b[0],x);
-        if(b[0].hp!=0) b[0].attack(a[0],y);
+        a[0].attack(b[0],x,b);
+        cout<<a[0].name<<"used move"<<x<<"\n";
+        if(b[0].hp!=0) {
+            b[0].attack(a[0],y,a);
+            cout<<b[0].name<<"used move"<<y<<"\n";
         // else if(b[0].hp==0){
         //     P1_Team(b);
         //     cout<<"---------------------------------------\n";
@@ -315,9 +318,14 @@ void speedf(int x,int y,vector<Unit> a,vector<Unit> b){
         //     cout<<"---------------------------------------\n";
         // }
         }
+    }
     else{
-        b[0].attack(a[0],y);
-        if(a[0].hp!=0) a[0].attack(b[0],x);
+        b[0].attack(a[0],y,a);
+        cout<<b[0].name<<"used move"<<y<<"\n";
+        if(a[0].hp!=0){
+          a[0].attack(b[0],x,b); 
+          cout<<a[0].name<<"used move"<<x<<"\n";
+        } 
         // else if(a[0].hp==0){
         //     P1_Team(a);
         //     cout<<"---------------------------------------\n";
@@ -358,8 +366,8 @@ int main(){
         ChoosePokemon(selected_pokemon2,pokemonNames,poke1,poke2,poke3,poke4,poke5,poke6,poke7,poke8,poke9,poke10);
         cout<<"---------------------------------------\n";//เลือกโปรแกมอน
     while(true){
-        selected_pokemon2[0].showStatusforP2();
-        selected_pokemon1[0].showStatusforP1();
+        selected_pokemon2[0].showStatusforP2(selected_pokemon2);
+        selected_pokemon1[0].showStatusforP1(selected_pokemon1);
 		char player1_action;
 		char player2_action;
 		int num1;
@@ -407,6 +415,7 @@ int main(){
 	    else if(player2_action == 'S') num2 = 0;
 	    swpoP(num1,selected_pokemon1);
 	    swpoP(num2,selected_pokemon2);
+	    speedf(num1,num2,selected_pokemon1,selected_pokemon2);
 	    
 }
 }
