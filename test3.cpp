@@ -26,6 +26,7 @@ class Unit{
         int hp;
         int atk;
         int spe;
+        double dmg;
         //Pok(string);
         Unit(string,string,int,int,int,int,int,string,string,int,string,string,int,string,string,int,string,bool);
 		vector<int> getSelect();
@@ -47,70 +48,69 @@ class Unit{
 //     }
 // }
 int Unit::beAttacked(int oppatk,string movetype,int moveatk,Unit x){
-    double dmg;
     if(protect_on) dmg = 0;
     else{
         if(movetype == "Fire"){
-            if(type == "Grass") dmg = (moveatk+oppatk-def)*2;
-            else if (type == "Ice") dmg = (moveatk+oppatk-def)*2;
-            else if (type == "Fire") dmg = (moveatk+oppatk-def)/2;
-            else if (type == "Water") dmg = (moveatk+oppatk-def)/2;
+            if(type == "Grass") dmg = (moveatk+oppatk-def)*2.0;
+            else if (type == "Ice") dmg = (moveatk+oppatk-def)*2.0;
+            else if (type == "Fire") dmg = (moveatk+oppatk-def)/2.0;
+            else if (type == "Water") dmg = (moveatk+oppatk-def)/2.0;
         }
         else if(movetype == "Grass"){
-            if(type == "Water") dmg = (moveatk+oppatk-def)*2;    
-            else if (type == "Ice") dmg = (moveatk+oppatk-def)/2;
-            else if (type == "Grass") dmg = (moveatk+oppatk-def)/2;
-            else if (type == "Fire") dmg = (moveatk+oppatk-def)/2;
-            else if (type == "Fairy") dmg = (moveatk+oppatk-def)*2;
-            else if (type == "Fighting") dmg = (moveatk+oppatk-def)*2;
+            if(type == "Water") dmg = (moveatk+oppatk-def)*2.0;    
+            else if (type == "Ice") dmg = (moveatk+oppatk-def)/2.0;
+            else if (type == "Grass") dmg = (moveatk+oppatk-def)/2.0;
+            else if (type == "Fire") dmg = (moveatk+oppatk-def)/2.0;
+            else if (type == "Fairy") dmg = (moveatk+oppatk-def)*2.0;
+            else if (type == "Fighting") dmg = (moveatk+oppatk-def)*2.0;
         }
         else if(movetype == "Water"){
-            if(type == "Fire") dmg = (moveatk+oppatk-def)*2;    
-            else if (type == "Grass") dmg = (moveatk+oppatk-def)/2;
-            else if (type == "Water") dmg = (moveatk+oppatk-def)/2;
+            if(type == "Fire") dmg = (moveatk+oppatk-def)*2.0;    
+            else if (type == "Grass") dmg = (moveatk+oppatk-def)/2.0;
+            else if (type == "Water") dmg = (moveatk+oppatk-def)/2.0;
         }
         else if(movetype == "Fighting"){
-            if(type == "Normal") dmg = (moveatk+oppatk-def)*2;    
+            if(type == "Normal") dmg = (moveatk+oppatk-def)*2.0;    
             else if (type == "Ghost") dmg = 0;
-            else if (type == "Ice") dmg = (moveatk+oppatk-def)*2;
-            else if (type == "Dark") dmg = (moveatk+oppatk-def)*2;
-            else if (type == "Fighting") dmg = (moveatk+oppatk-def)/2;
-            else if (type == "Grass") dmg = (moveatk+oppatk-def)/2;
-            else if (type == "Fairy") dmg = (moveatk+oppatk-def)/2;
+            else if (type == "Ice") dmg = (moveatk+oppatk-def)*2.0;
+            else if (type == "Dark") dmg = (moveatk+oppatk-def)*2.0;
+            else if (type == "Fighting") dmg = (moveatk+oppatk-def)/2.0;
+            else if (type == "Grass") dmg = (moveatk+oppatk-def)/2.0;
+            else if (type == "Fairy") dmg = (moveatk+oppatk-def)/2.0;
         }
         else if(movetype == "Dragon"){
-            if(type == "Dragon") dmg = (moveatk+oppatk-def)*2;    
+            if(type == "Dragon") dmg = (moveatk+oppatk-def)*2.0;    
             else if (type == "Fairy") dmg = 0;
         }
         else if(movetype == "Ice"){
-            if(type == "Dragon") dmg = (moveatk+oppatk-def)*2;
-            else if (type == "Grass") dmg = (moveatk+oppatk-def)*2;
-            else if (type == "Water") dmg = (moveatk+oppatk-def)/2;
-            else if (type == "Fire") dmg = (moveatk+oppatk-def)/2;
-            else if (type == "Ice") dmg = (moveatk+oppatk-def)/2;
+            if(type == "Dragon") dmg = (moveatk+oppatk-def)*2.0;
+            else if (type == "Grass") dmg = (moveatk+oppatk-def)*2.0;
+            else if (type == "Water") dmg = (moveatk+oppatk-def)/2.0;
+            else if (type == "Fire") dmg = (moveatk+oppatk-def)/2.0;
+            else if (type == "Ice") dmg = (moveatk+oppatk-def)/2.0;
         }
         else if(movetype == "Dark"){
-            if(type == "Ghost") dmg = (moveatk+oppatk-def)*2;    
-            else if (type == "Fighting") dmg = (moveatk+oppatk-def)/2;
+            if(type == "Ghost") dmg = (moveatk+oppatk-def)*2.0;    
+            else if (type == "Fighting") dmg = (moveatk+oppatk-def)/2.0;
         }
         else if(movetype == "Ghost"){
-            if(type == "Ghost") dmg = (moveatk+oppatk-def)*2;    
+            if(type == "Ghost") dmg = (moveatk+oppatk-def)*2.0;    
             else if (type == "Normal") dmg =0;
-            else if (type == "Dark") dmg = (moveatk+oppatk-def)/2;
+            else if (type == "Dark") dmg = (moveatk+oppatk-def)/2.0;
         }
         else if(movetype == "Fairy"){
-            if(type == "Fighting") dmg = (moveatk+oppatk-def)*2;    
-            else if (type == "Dark") dmg = (moveatk+oppatk-def)*2;
-            else if (type == "Dragon") dmg = (moveatk+oppatk-def)*2;
-            else if (type == "Fire") dmg = (moveatk+oppatk-def)/2;
-            else if (type == "Grass") dmg = (moveatk+oppatk-def)/2;
+            if(type == "Fighting") dmg = (moveatk+oppatk-def)*2.0;    
+            else if (type == "Dark") dmg = (moveatk+oppatk-def)*2.0;
+            else if (type == "Dragon") dmg = (moveatk+oppatk-def)*2.0;
+            else if (type == "Fire") dmg = (moveatk+oppatk-def)/2.0;
+            else if (type == "Grass") dmg = (moveatk+oppatk-def)/2.0;
         }
         else if(movetype == "Normal"){
             if(type == "Ghost") dmg = 0;    
         }
     }
     
-    x.hp =x.hp- dmg;
+    x.hp = x.hp - dmg;
 	if(x.hp <= 0) x.hp = 0;
 	cout<<dmg<<" "<<x.hp<<" ";
 	return x.hp;	
