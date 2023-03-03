@@ -112,7 +112,7 @@ int beAttacked(int oppatk,string movetype,int moveatk,Unit x){
     //}
     
     x.hp = x.hp - dmg;
-	//if(x.hp <= 0) x.hp = 0;
+	if(x.hp <= 0) x.hp = 0;
 	cout<<dmg<<" "<<x.hp<<" ";
 	return x.hp;	
 }
