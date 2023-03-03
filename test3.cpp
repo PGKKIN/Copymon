@@ -6,10 +6,10 @@
 #include<iomanip>
 using namespace std;
 
+        float dmg;
 class Unit{
-        string type;
+       public:
         int hpmax;
-        int def;
         string move1;
         string move1type;
         int move1atk;
@@ -21,12 +21,13 @@ class Unit{
         int move3atk;
         string move4;//protect
         bool protect_on;
-    public:
         string name;
+        string type;
         int hp;
+        int def;
         int atk;
         int spe;
-        double dmg;
+
         //Pok(string);
         Unit(string,string,int,int,int,int,int,string,string,int,string,string,int,string,string,int,string,bool);
 		vector<int> getSelect();
@@ -34,11 +35,11 @@ class Unit{
         vector<string> getSelect3();
         vector<int> getSelect4();
         void choose(Unit *);
-		void showStatusforP1(vector<Unit> &);
-		void showStatusforP2(vector<Unit> &);
+		//void showStatusforP1(vector<Unit> &);
+		//void showStatusforP2(vector<Unit> &);
 		void newTurn();
-		int attack(Unit &,int,Unit);
-		int beAttacked(int,string,int,Unit);
+		//int attack(Unit &,int,Unit);
+		//int beAttacked(int,string,int,Unit);
 		int heal();	
 		bool isDead();
 };
@@ -47,78 +48,78 @@ class Unit{
         
 //     }
 // }
-int Unit::beAttacked(int oppatk,string movetype,int moveatk,Unit x){
-    if(protect_on) dmg = 0;
-    else{
+int beAttacked(int oppatk,string movetype,int moveatk,Unit x){
+    //if(protect_on) dmg = 0;
+    //else{
         if(movetype == "Fire"){
-            if(type == "Grass") dmg = (moveatk+oppatk-def)*2.0;
-            else if (type == "Ice") dmg = (moveatk+oppatk-def)*2.0;
-            else if (type == "Fire") dmg = (moveatk+oppatk-def)/2.0;
-            else if (type == "Water") dmg = (moveatk+oppatk-def)/2.0;
+            if(x.type == "Grass") dmg = (moveatk+oppatk-x.def)*2.0;
+            if (x.type == "Ice") dmg = (moveatk+oppatk-x.def)*2.0;
+            if (x.type == "Fire") dmg = (moveatk+oppatk-x.def)/2.0;
+            if (x.type == "Water") dmg = (moveatk+oppatk-x.def)/2.0;
         }
-        else if(movetype == "Grass"){
-            if(type == "Water") dmg = (moveatk+oppatk-def)*2.0;    
-            else if (type == "Ice") dmg = (moveatk+oppatk-def)/2.0;
-            else if (type == "Grass") dmg = (moveatk+oppatk-def)/2.0;
-            else if (type == "Fire") dmg = (moveatk+oppatk-def)/2.0;
-            else if (type == "Fairy") dmg = (moveatk+oppatk-def)*2.0;
-            else if (type == "Fighting") dmg = (moveatk+oppatk-def)*2.0;
+        if(movetype == "Grass"){
+            if(x.type == "Water") dmg = (moveatk+oppatk-x.def)*2.0;    
+            if (x.type == "Ice") dmg = (moveatk+oppatk-x.def)/2.0;
+            if (x.type == "Grass") dmg = (moveatk+oppatk-x.def)/2.0;
+            if (x.type == "Fire") dmg = (moveatk+oppatk-x.def)/2.0;
+            if (x.type == "Fairy") dmg = (moveatk+oppatk-x.def)*2.0;
+            if (x.type == "Fighting") dmg = (moveatk+oppatk-x.def)*2.0;
         }
-        else if(movetype == "Water"){
-            if(type == "Fire") dmg = (moveatk+oppatk-def)*2.0;    
-            else if (type == "Grass") dmg = (moveatk+oppatk-def)/2.0;
-            else if (type == "Water") dmg = (moveatk+oppatk-def)/2.0;
+        if(movetype == "Water"){
+            if(x.type == "Fire") dmg = (moveatk+oppatk-x.def)*2.0;    
+            if (x.type == "Grass") dmg = (moveatk+oppatk-x.def)/2.0;
+            if (x.type == "Water") dmg = (moveatk+oppatk-x.def)/2.0;
         }
-        else if(movetype == "Fighting"){
-            if(type == "Normal") dmg = (moveatk+oppatk-def)*2.0;    
-            else if (type == "Ghost") dmg = 0;
-            else if (type == "Ice") dmg = (moveatk+oppatk-def)*2.0;
-            else if (type == "Dark") dmg = (moveatk+oppatk-def)*2.0;
-            else if (type == "Fighting") dmg = (moveatk+oppatk-def)/2.0;
-            else if (type == "Grass") dmg = (moveatk+oppatk-def)/2.0;
-            else if (type == "Fairy") dmg = (moveatk+oppatk-def)/2.0;
+        if(movetype == "Fighting"){
+            if(x.type == "Normal") dmg = (moveatk+oppatk-x.def)*2.0;    
+            if (x.type == "Ghost") dmg = 0;
+            if (x.type == "Ice") dmg = (moveatk+oppatk-x.def)*2.0;
+            if (x.type == "Dark") dmg = (moveatk+oppatk-x.def)*2.0;
+            if (x.type == "Fighting") dmg = (moveatk+oppatk-x.def)/2.0;
+            if (x.type == "Grass") dmg = (moveatk+oppatk-x.def)/2.0;
+            if (x.type == "Fairy") dmg = (moveatk+oppatk-x.def)/2.0;
         }
-        else if(movetype == "Dragon"){
-            if(type == "Dragon") dmg = (moveatk+oppatk-def)*2.0;    
-            else if (type == "Fairy") dmg = 0;
+        if(movetype == "Dragon"){
+            if(x.type == "Dragon") dmg = (moveatk+oppatk-x.def)*2.0;    
+            if (x.type == "Fairy") dmg = 0;
         }
-        else if(movetype == "Ice"){
-            if(type == "Dragon") dmg = (moveatk+oppatk-def)*2.0;
-            else if (type == "Grass") dmg = (moveatk+oppatk-def)*2.0;
-            else if (type == "Water") dmg = (moveatk+oppatk-def)/2.0;
-            else if (type == "Fire") dmg = (moveatk+oppatk-def)/2.0;
-            else if (type == "Ice") dmg = (moveatk+oppatk-def)/2.0;
+        if(movetype == "Ice"){
+            if(x.type == "Dragon") dmg = (moveatk+oppatk-x.def)*2.0;
+            if (x.type == "Grass") dmg = (moveatk+oppatk-x.def)*2.0;
+            if (x.type == "Water") dmg = (moveatk+oppatk-x.def)/2.0;
+            if (x.type == "Fire") dmg = (moveatk+oppatk-x.def)/2.0;
+            if (x.type == "Ice") dmg = (moveatk+oppatk-x.def)/2.0;
         }
-        else if(movetype == "Dark"){
-            if(type == "Ghost") dmg = (moveatk+oppatk-def)*2.0;    
-            else if (type == "Fighting") dmg = (moveatk+oppatk-def)/2.0;
+        if(movetype == "Dark"){
+            if(x.type == "Ghost") dmg = (moveatk+oppatk-x.def)*2.0;    
+            if (x.type == "Fighting") dmg = (moveatk+oppatk-x.def)/2.0;
         }
-        else if(movetype == "Ghost"){
-            if(type == "Ghost") dmg = (moveatk+oppatk-def)*2.0;    
-            else if (type == "Normal") dmg =0;
-            else if (type == "Dark") dmg = (moveatk+oppatk-def)/2.0;
+        if(movetype == "Ghost"){
+            if(x.type == "Ghost") dmg = (moveatk+oppatk-x.def)*2.0;    
+            if (x.type == "Normal") dmg =0;
+            if (x.type == "Dark") dmg = (moveatk+oppatk-x.def)/2.0;
         }
-        else if(movetype == "Fairy"){
-            if(type == "Fighting") dmg = (moveatk+oppatk-def)*2.0;    
-            else if (type == "Dark") dmg = (moveatk+oppatk-def)*2.0;
-            else if (type == "Dragon") dmg = (moveatk+oppatk-def)*2.0;
-            else if (type == "Fire") dmg = (moveatk+oppatk-def)/2.0;
-            else if (type == "Grass") dmg = (moveatk+oppatk-def)/2.0;
+        if(movetype == "Fairy"){
+            if(x.type == "Fighting") dmg = (moveatk+oppatk-x.def)*2.0;    
+            if (x.type == "Dark") dmg = (moveatk+oppatk-x.def)*2.0;
+            if (x.type == "Dragon") dmg = (moveatk+oppatk-x.def)*2.0;
+            if (x.type == "Fire") dmg = (moveatk+oppatk-x.def)/2.0;
+            if (x.type == "Grass") dmg = (moveatk+oppatk-x.def)/2.0;
         }
-        else if(movetype == "Normal"){
-            if(type == "Ghost") dmg = 0;    
+        if(movetype == "Normal"){
+            if(x.type == "Ghost") dmg = 0;    
         }
-    }
+    //}
     
     x.hp = x.hp - dmg;
-	if(x.hp <= 0) x.hp = 0;
+	//if(x.hp <= 0) x.hp = 0;
 	cout<<dmg<<" "<<x.hp<<" ";
 	return x.hp;	
 }
-int Unit::attack(Unit &x,int y,Unit z){
-    if(y==1) return x.beAttacked(atk,move1type,move1atk,z);
-    else if(y==2) return x.beAttacked(atk,move2type,move2atk,z);
-    else if(y==3) return x.beAttacked(atk,move3type,move3atk,z); 
+int attack(Unit x,int y,Unit z){
+    if(y==1) return beAttacked(z.atk,z.move1type,z.move1atk,x);
+    else if(y==2) return beAttacked(z.atk,z.move2type,z.move2atk,x);
+    else if(y==3) return beAttacked(z.atk,z.move3type,z.move3atk,x); 
 }
 Unit::Unit(string a,string b,int c,int d,int e,int q,int r,string f,string g,int h,string i,string j,int k,string l,string m,int n,string o,bool p){
     name = a;
@@ -179,16 +180,16 @@ int Unit::heal(){
 	hp = hp + h;
 	return h;
 }	
-void Unit::showStatusforP1(vector<Unit> &x){
+void showStatusforP1(vector<Unit> &x){
 		cout << "Player1--------------------------------\n"; 
-		cout << name << "\n"; 
-		cout << "HP: " << x[0].hp << "/" << hpmax << "\tATK: "<< atk << "\t\tDEF: "<< def;		
+		cout << x[0].name << "\n"; 
+		cout << "HP: " << x[0].hp << "/" << x[0].hpmax << "\tATK: "<< x[0].atk << "\t\tDEF: "<< x[0].def;		
 		cout << "\n---------------------------------------\n";
     }
-void Unit::showStatusforP2(vector<Unit> &x){
+void showStatusforP2(vector<Unit> &x){
 		cout << "\t\t\t\tPlayer2--------------------------------\n"; 
-		cout << "\t\t\t\t" << name << "\n"; 
-		cout << "\t\t\t\tHP: " << x[0].hp << "/" << hpmax<< "\t\tATK: "<< atk << "\t\tDEF: "<< def;
+		cout << "\t\t\t\t" << x[0].name << "\n"; 
+		cout << "\t\t\t\tHP: " << x[0].hp << "/" << x[0].hpmax<< "\t\tATK: "<< x[0].atk << "\t\tDEF: "<< x[0].def;
 		cout << "\n\t\t\t\t---------------------------------------\n";
 	}
 void ChoosePokemon(vector<Unit> &y,string x[],Unit a,Unit b,Unit c,Unit d,Unit e,Unit f,Unit g,Unit h,Unit i,Unit j){
@@ -308,12 +309,12 @@ void swpoP(int x,vector<Unit> a){
     }
     if(x==5) a[0].heal();
 }
-void speedf(int x,int y,vector<Unit> a,vector<Unit> b){
-        a[0].attack(b[0],x,b[0]);
-        cout<<a[0].name<<"used move"<<x<<"\n";
-        b[0].attack(a[0],y,a[0]);
-        cout<<b[0].name<<"used move"<<y<<"\n";
-}
+// void speedf(int x,int y,vector<Unit> a,vector<Unit> b){
+//         a[0].attack(b[0],x,b[0]);
+//         cout<<a[0].name<<"used move"<<x<<"\n";
+//         b[0].attack(a[0],y,a[0]);
+//         cout<<b[0].name<<"used move"<<y<<"\n";
+// }
 
 int main(){  
     Unit poke1 ("Charizard","Fire",200,50,50,100,200,"Daimonji","Fire",75,"DragonClaw","Dragon",50,"BrickBreak","Fighting",50,"Protect",false);
@@ -325,7 +326,7 @@ int main(){
 	Unit poke7 ("Gardevoir","Fairy",200,75,25,85,200,"Moonblast","Fairy",75,"MysticalFire","Fire",50,"GrassKnot","Grass",50,"Protect",false);
 	Unit poke8 ("Garchomp","Dragon",200,50,50,102,200,"DragonRush","Dragon",75,"BrickBreak","Fighting",50,"FireFang","Fire",50,"Protect",false);
 	Unit poke9 ("Abomasnow","Ice",300,30,30,60,300,"Blizzard","Ice",75,"WoodHammer","Grass",60,"IcePunch","Ice",50,"Protect",false);
-	Unit poke10 ("Absol","Dark",200,60,40,75,200,"NightSlash","Dark",75,"Curse","Ghost",50,"RockSmash","Fighting",50,"Protect",false);
+	Unit poke10 ("Absol","Dark",200,60,40,95,200,"NightSlash","Dark",75,"Curse","Ghost",50,"RockSmash","Fighting",50,"Protect",false);
 
     vector<Unit> player1_pokemon = {poke1, poke2, poke3};
     vector<Unit> allpoke = {poke1, poke2, poke3,poke4,poke5,poke6,poke7,poke8,poke9,poke10};
@@ -344,8 +345,8 @@ int main(){
         ChoosePokemon(selected_pokemon2,pokemonNames,poke1,poke2,poke3,poke4,poke5,poke6,poke7,poke8,poke9,poke10);
         cout<<"---------------------------------------\n";//เลือกโปรแกมอน
     while(true){
-        selected_pokemon2[0].showStatusforP2(selected_pokemon2);
-        selected_pokemon1[0].showStatusforP1(selected_pokemon1);
+        showStatusforP2(selected_pokemon2);
+        showStatusforP1(selected_pokemon1);
 		char player1_action;
 		char player2_action;
 		int num1;
@@ -394,12 +395,13 @@ int main(){
 	    
 	    if(num1==0 or num1==5) swpoP(num1,selected_pokemon1);
 	    else if(num1==1 or num1==2 or num1==3){
-	        selected_pokemon1[0].attack(selected_pokemon2[0],num1,selected_pokemon2[0]);
-            cout<<selected_pokemon1[0].name<<"used move"<<num1<<"\n";
+	        attack(selected_pokemon1[0],num2,selected_pokemon2[0]);
+            cout<<selected_pokemon1[0].name<<" used move"<<num1<<"\n";
 	    }
 	    if(num2==0 or num2==5) swpoP(num2,selected_pokemon2);
 	    else if(num2==1 or num2==2 or num2==3) {
-	        selected_pokemon2[0].attack(selected_pokemon1[0],num2,selected_pokemon1[0]);
+	        attack(selected_pokemon2[0],num2,selected_pokemon1[0]);
+	        
             cout<<selected_pokemon2[0].name<<" used move"<<num2<<"\n";
 	    }
 	    cout<<"---------------------------------------\n";
