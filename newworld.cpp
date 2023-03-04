@@ -27,26 +27,24 @@ class Unit{
         int def;
         int atk;
         int spe;
-
-        //Pok(string);
         Unit(string,string,int,int,int,int,int,string,string,int,string,string,int,string,string,int,string,bool);
 		vector<int> getSelect();
         vector<string> getSelect2();
         vector<string> getSelect3();
         vector<int> getSelect4();
-        void choose(Unit *);
 		void showStatusforP1();
 		void showStatusforP2();
 		void newTurn();
 		int attack(Unit &,int);
 		int beAttacked(int,string,int);
-		//int heal();	
+		int heal();	
+		void protect();
 		bool isDead();
 };
 
 int Unit::beAttacked(int oppatk,string movetype,int moveatk){
-    //if(protect_on) dmg = 0;
-    //else{
+    if(protect_on==true) dmg = 0;
+    else{
         if(movetype == "Fire"){
             if(type == "Grass") dmg = (moveatk+oppatk-def)*2.0;
             if(type == "Ice") dmg = (moveatk+oppatk-def)*2.0;
@@ -167,7 +165,7 @@ int Unit::beAttacked(int oppatk,string movetype,int moveatk){
             if (type == "Ice") dmg = moveatk+oppatk-def;
             if (type == "Fairy") dmg = moveatk+oppatk-def;
         }
-    //}
+    }
     
     hp = hp - dmg;
 	if(hp <= 0) hp = 0;
@@ -177,6 +175,9 @@ int Unit::attack(Unit &x,int y){
     if(y==1) return x.beAttacked(atk,move1type,move1atk);
     else if(y==2) return x.beAttacked(atk,move2type,move2atk);
     else if(y==3) return x.beAttacked(atk,move3type,move3atk); 
+}
+void Unit::protect(){
+    protect_on = true;
 }
 Unit::Unit(string a,string b,int c,int d,int e,int q,int r,string f,string g,int h,string i,string j,int k,string l,string m,int n,string o,bool p){
     name = a;
@@ -231,11 +232,11 @@ vector<int> Unit::getSelect4(){
      x.push_back(move3atk);
      return x;
 }
-int heal(Unit &x){
+int Unit::heal(){
     int h=60;
-	if(x.hp + h > x.hpmax) h = x.hpmax - x.hp;
-	x.hp = x.hp + h;
-	return x.hp;
+	if(hp + h > hpmax) h = hpmax - hp;
+	hp = hp + h;
+	return hp;
 }	
 void Unit::showStatusforP1(){
 		cout << "Player1--------------------------------\n"; 
@@ -365,8 +366,12 @@ void swpoP(int x,vector<Unit> &a){
         cout<<"---------------------------------------\n";
     }
 }
+void battle(vector<Unit> &x,vector<Unit> &y){
+    
+}
 
-int main(){  
+int main(){
+    Unit decoy("None","x",0,0,0,0,0,"x","x",0,"x","x",0,"x","x",0,"x",false);
     Unit poke1 ("Charizard","Fire",200,50,50,100,200,"Daimonji","Fire",75,"DragonClaw","Dragon",50,"BrickBreak","Fighting",50,"Protect",false);
 	Unit poke2 ("Blastoise","Water",200,25,75,78,200,"HydroPump","Water",75,"DarkPaluse","Dark",50,"IceBeam","Ice",50,"Protect",false);
 	Unit poke3 ("Venusaur","Grass",200,25,75,80,200,"SolarBeam","Grass",75,"SeedBomb","Grass",65,"Doube-Edge","Normal",60,"Protect",false);
@@ -384,7 +389,6 @@ int main(){
     ////////////////////////////////////////////////////
     vector<Unit> selected_pokemon1; //Arrey โปเกมอน;
     vector<Unit> selected_pokemon2; //Arrey โปเกมอน
-    int sd=1;
     showpk(allpoke);
     ////////////////////////////////////////////////////
         cout<<"---------------------------------------\n";//เลือกโปร
@@ -441,22 +445,61 @@ int main(){
 		}
 	    else if(player2_action=='H') num2=5;
 	    else if(player2_action == 'S') num2 = 0;
-	    
-	    if(num1 == 5) heal(selected_pokemon1[0]);
-	    if(num2 == 5) heal(selected_pokemon2[0]);
-	    
-	    
+	    //***********************************************************
+	    if(num1 == 5) {
+	        selected_pokemon1[0].heal();
+	        cout<<selected_pokemon1[0].name<<" healed 60 HP\n";
+	    }
+	    if(num2 == 5){
+	        selected_pokemon2[0].heal();
+	        cout<<selected_pokemon2[0].name<<" healed 60 HP\n";
+	    } 
+	    if(num1 == 4){
+	        selected_pokemon1[0].protect();
+	        cout<<selected_pokemon1[0].name<<" used Protect\n";
+	    }
+	    if(num2 == 4){
+	        selected_pokemon2[0].protect();
+	        cout<<selected_pokemon2[0].name<<" used Protect\n";
+	    }
 	    if(num1==0 or num1==5) swpoP(num1,selected_pokemon1);
-	    else if(num1==1 or num1==2 or num1==3){
+	    if(num2==0 or num2==5) swpoP(num2,selected_pokemon2);
+	    //***********************************************************
+	    
+	    
+	    if(num1==1 or num1==2 or num1==3){
 	        selected_pokemon1[0].attack(selected_pokemon2[0],num1);
             cout<<selected_pokemon1[0].name<<" used move"<<num1<<"\n";
 	    }
-	    
-	    if(num2==0 or num2==5) swpoP(num2,selected_pokemon2);
-	    else if(num2==1 or num2==2 or num2==3) {
-	        selected_pokemon2[0].attack(selected_pokemon1[0],num2);
-	        
-            cout<<selected_pokemon2[0].name<<" used move"<<num2<<"\n";
+	    if(selected_pokemon2[0].hp == 0){
+	        selected_pokemon2[0].showStatusforP2();
+            selected_pokemon1[0].showStatusforP1();
+	        selected_pokemon2[0]=decoy;
+	        cout<<"Player2 please choose new Copymon to send out\n";
+	        P1_Team(selected_pokemon2);
+            cout<<"---------------------------------------\n";
+            Switch(selected_pokemon2); 
+            cout<<"---------------------------------------\n";
+            P1_Team(selected_pokemon2);
+            cout<<"---------------------------------------\n";
+            continue;
+	    }
+	    if(selected_pokemon2[0].hp != 0){
+    	    if(num2==1 or num2==2 or num2==3) {
+    	        selected_pokemon2[0].attack(selected_pokemon1[0],num2);
+    	        
+                cout<<selected_pokemon2[0].name<<" used move"<<num2<<"\n";
+    	        }
+	    }
+	    if(selected_pokemon1[0].hp == 0){
+	        selected_pokemon1[0]=decoy;
+	        cout<<"Player2 please choose new Copymon to send out\n";
+	        P1_Team(selected_pokemon1);
+            cout<<"---------------------------------------\n";
+            Switch(selected_pokemon1); 
+            cout<<"---------------------------------------\n";
+            P1_Team(selected_pokemon1);
+            cout<<"---------------------------------------\n";
 	    }
 	    cout<<"---------------------------------------\n";
 	    
