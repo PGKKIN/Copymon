@@ -35,20 +35,16 @@ class Unit{
         vector<string> getSelect3();
         vector<int> getSelect4();
         void choose(Unit *);
-		//void showStatusforP1(vector<Unit> &);
-		//void showStatusforP2(vector<Unit> &);
+		void showStatusforP1();
+		void showStatusforP2();
 		void newTurn();
-		//int attack(Unit &,int,Unit);
-		//int beAttacked(int,string,int,Unit);
-		int heal();	
+		int attack(Unit &,int);
+		int beAttacked(int,string,int);
+		//int heal();	
 		bool isDead();
 };
-// Unit::Pok(string x){
-//     if(x=="Charizard"){
-        
-//     }
-// }
-int beAttacked(int oppatk,string movetype,int moveatk,Unit x){
+
+int Unit::beAttacked(int oppatk,string movetype,int moveatk){
     //if(protect_on) dmg = 0;
     //else{
         if(movetype == "Fire"){
@@ -173,15 +169,15 @@ int beAttacked(int oppatk,string movetype,int moveatk,Unit x){
         }
     //}
     
-    x.hp = x.hp - dmg;
-	if(x.hp <= 0) x.hp = 0;
-	cout<<dmg<<" "<<x.hp<<" ";
-	return x.hp;	
+    hp = hp - dmg;
+	if(hp <= 0) hp = 0;
+	cout<<dmg<<" "<<hp<<" ";
+	return dmg;	
 }
-int attack(Unit x,int y,Unit z){
-    if(y==1) return beAttacked(z.atk,z.move1type,z.move1atk,x);
-    else if(y==2) return beAttacked(z.atk,z.move2type,z.move2atk,x);
-    else if(y==3) return beAttacked(z.atk,z.move3type,z.move3atk,x); 
+int Unit::attack(Unit &x,int y){
+    if(y==1) return x.beAttacked(atk,move1type,move1atk);
+    else if(y==2) return x.beAttacked(atk,move2type,move2atk);
+    else if(y==3) return x.beAttacked(atk,move3type,move3atk); 
 }
 Unit::Unit(string a,string b,int c,int d,int e,int q,int r,string f,string g,int h,string i,string j,int k,string l,string m,int n,string o,bool p){
     name = a;
@@ -236,22 +232,22 @@ vector<int> Unit::getSelect4(){
      x.push_back(move3atk);
      return x;
 }
-int Unit::heal(){
+int heal(Unit &x){
     int h=60;
-	if(hp + h > hpmax) h = hpmax - hp;
-	hp = hp + h;
-	return h;
+	if(x.hp + h > x.hpmax) h = x.hpmax - x.hp;
+	x.hp = x.hp + h;
+	return x.hp;
 }	
-void showStatusforP1(vector<Unit> &x){
+void Unit::showStatusforP1(){
 		cout << "Player1--------------------------------\n"; 
-		cout << x[0].name << "\n"; 
-		cout << "HP: " << x[0].hp << "/" << x[0].hpmax << "\tATK: "<< x[0].atk << "\t\tDEF: "<< x[0].def;		
+		cout << name << "\n"; 
+		cout << "HP: " << hp << "/" << hpmax << "\tATK: "<< atk << "\t\tDEF: "<< def;		
 		cout << "\n---------------------------------------\n";
     }
-void showStatusforP2(vector<Unit> &x){
+void Unit::showStatusforP2(){
 		cout << "\t\t\t\tPlayer2--------------------------------\n"; 
-		cout << "\t\t\t\t" << x[0].name << "\n"; 
-		cout << "\t\t\t\tHP: " << x[0].hp << "/" << x[0].hpmax<< "\t\tATK: "<< x[0].atk << "\t\tDEF: "<< x[0].def;
+		cout << "\t\t\t\t" << name << "\n"; 
+		cout << "\t\t\t\tHP: " << hp << "/" << hpmax<< "\t\tATK: "<< atk << "\t\tDEF: "<< def;
 		cout << "\n\t\t\t\t---------------------------------------\n";
 	}
 void ChoosePokemon(vector<Unit> &y,string x[],Unit a,Unit b,Unit c,Unit d,Unit e,Unit f,Unit g,Unit h,Unit i,Unit j){
@@ -360,7 +356,7 @@ void showpk(vector<Unit> x){
         cout<<endl;
     }
 }
-void swpoP(int x,vector<Unit> a){
+void swpoP(int x,vector<Unit> &a){
     if(x==0){
         P1_Team(a);
         cout<<"---------------------------------------\n";
@@ -369,14 +365,7 @@ void swpoP(int x,vector<Unit> a){
         P1_Team(a);
         cout<<"---------------------------------------\n";
     }
-    if(x==5) a[0].heal();
 }
-// void speedf(int x,int y,vector<Unit> a,vector<Unit> b){
-//         a[0].attack(b[0],x,b[0]);
-//         cout<<a[0].name<<"used move"<<x<<"\n";
-//         b[0].attack(a[0],y,a[0]);
-//         cout<<b[0].name<<"used move"<<y<<"\n";
-// }
 
 int main(){  
     Unit poke1 ("Charizard","Fire",200,50,50,100,200,"Daimonji","Fire",75,"DragonClaw","Dragon",50,"BrickBreak","Fighting",50,"Protect",false);
@@ -407,8 +396,8 @@ int main(){
         ChoosePokemon(selected_pokemon2,pokemonNames,poke1,poke2,poke3,poke4,poke5,poke6,poke7,poke8,poke9,poke10);
         cout<<"---------------------------------------\n";//เลือกโปรแกมอน
     while(true){
-        showStatusforP2(selected_pokemon2);
-        showStatusforP1(selected_pokemon1);
+        selected_pokemon2[0].showStatusforP2();
+        selected_pokemon1[0].showStatusforP1();
 		char player1_action;
 		char player2_action;
 		int num1;
@@ -431,7 +420,7 @@ int main(){
             cin>>num1;
             //if(num == 1) selected_pokemon1[0].();
 		}
-	    else if(player1_action=='H') selected_pokemon1[0].heal();
+	    else if(player1_action=='H') num1=5;
 	    else if(player1_action == 'S'){
 	        
 	    }
@@ -455,17 +444,22 @@ int main(){
 	    else if(player2_action=='H') num2=5;
 	    else if(player2_action == 'S') num2 = 0;
 	    
+	    if(num1 == 5) heal(selected_pokemon1[0]);
+	    if(num2 == 5) heal(selected_pokemon2[0]);
+	    
+	    
 	    if(num1==0 or num1==5) swpoP(num1,selected_pokemon1);
 	    else if(num1==1 or num1==2 or num1==3){
-	        attack(selected_pokemon1[0],num2,selected_pokemon2[0]);
+	        selected_pokemon1[0].attack(selected_pokemon2[0],num1);
             cout<<selected_pokemon1[0].name<<" used move"<<num1<<"\n";
 	    }
 	    if(num2==0 or num2==5) swpoP(num2,selected_pokemon2);
 	    else if(num2==1 or num2==2 or num2==3) {
-	        attack(selected_pokemon2[0],num2,selected_pokemon1[0]);
+	        selected_pokemon2[0].attack(selected_pokemon1[0],num2);
 	        
             cout<<selected_pokemon2[0].name<<" used move"<<num2<<"\n";
 	    }
 	    cout<<"---------------------------------------\n";
+	    
 }
 }
