@@ -18,26 +18,26 @@ SDL_Rect exit_button;
 
 void InitSDL() {
     if (SDL_Init(SDL_INIT_VIDEO) < 0) {
-        cerr << "SDL could not initialize! SDL_Error: " << SDL_GetError() << endl;
+        cout << "SDL could not initialize! SDL_Error: " << SDL_GetError() << endl;
         exit(1);
     }
     window = SDL_CreateWindow(WINDOW_TITLE.c_str(), SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, SCREEN_WIDTH, SCREEN_HEIGHT, SDL_WINDOW_SHOWN);
     if (!window) {
-        cerr << "Window could not be created! SDL_Error: " << SDL_GetError() << endl;
+        cout << "Window could not be created! SDL_Error: " << SDL_GetError() << endl;
         exit(1);
     }
     renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED);
     if (!renderer) {
-        cerr << "Renderer could not be created! SDL_Error: " << SDL_GetError() << endl;
+        cout << "Renderer could not be created! SDL_Error: " << SDL_GetError() << endl;
         exit(1);
     }
     if (TTF_Init() < 0) {
-        cerr << "SDL_ttf could not initialize! SDL_ttf Error: " << TTF_GetError() << endl;
+        cout << "SDL_ttf could not initialize! SDL_ttf Error: " << TTF_GetError() << endl;
         exit(1);
     }
     font = TTF_OpenFont("Pokemon Solid.ttf", 24);
     if (!font) {
-        cerr << "Failed to load font! SDL_ttf Error: " << TTF_GetError() << endl;
+        cout << "Failed to load font! SDL_ttf Error: " << TTF_GetError() << endl;
         exit(1);
     }
 }
