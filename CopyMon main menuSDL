@@ -1,5 +1,6 @@
 #include <SDL.h>
 #include <SDL_ttf.h>
+#include <SDL_image.h>
 #include <string>
 #include <iostream>
 
@@ -15,6 +16,7 @@ TTF_Font* font = nullptr;
 SDL_Color font_color = { 255, 255, 255 };
 SDL_Rect start_button;
 SDL_Rect exit_button;
+SDL_Texture* background_texture = nullptr;
 
 void InitSDL() {
     if (SDL_Init(SDL_INIT_VIDEO) < 0) {
@@ -40,6 +42,10 @@ void InitSDL() {
         cout << "Failed to load font! SDL_ttf Error: " << TTF_GetError() << endl;
         exit(1);
     }
+    if (IMG_Init(IMG_INIT_PNG) != IMG_INIT_PNG) {
+        cout << "SDL_image could not initialize! SDL_image Error: " << IMG_GetError() << endl;
+        exit(1);
+    }
 }
 
 void QuitSDL() {
@@ -47,12 +53,18 @@ void QuitSDL() {
     TTF_Quit();
     SDL_DestroyRenderer(renderer);
     SDL_DestroyWindow(window);
+    SDL_DestroyTexture(background_texture);
     SDL_Quit();
 }
 
-void DrawHeader() {
-    string header_text = "Copymon";
-    DrawText(header_text, SCREEN_WIDTH / 2 - header_text.length() * 12, 10);
+void LoadTextures() {
+    SDL_Surface* surface = IMG_Load("CopymonBG.png");
+    if (!surface) {
+        cerr << "Failed to load background image! SDL_image Error: " << IMG_GetError() << endl;
+        exit(1);
+    }
+    background_texture = SDL_CreateTextureFromSurface(renderer, surface);
+    SDL_FreeSurface(surface);
 }
 
 void DrawText(string text, int x, int y) {
@@ -65,7 +77,7 @@ void DrawText(string text, int x, int y) {
 }
 
 void DrawButton(SDL_Rect rect, string text) {
-    SDL_SetRenderDrawColor(renderer, 0, 255, 0, 255);
+    SDL_SetRenderDrawColor(renderer, 0, 0, 0, 0);
     SDL_RenderFillRect(renderer, &rect);
     DrawText(text, rect.x + 40, rect.y + 10);
 }
@@ -97,6 +109,7 @@ void HandleEvents(bool& running, bool& game_running) {
 }
 int main(int argc, char* argv[]) {
     InitSDL();
+    LoadTextures();
     bool running = true;
     bool game_running = false;
 
@@ -106,10 +119,7 @@ int main(int argc, char* argv[]) {
     while (running) {
         HandleEvents(running, game_running);
 
-        SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
-        SDL_RenderClear(renderer);
-
-        DrawHeader();
+        SDL_RenderCopy(renderer, background_texture, nullptr, nullptr); // render background texture first
 
         DrawButton(start_button, "Start");
         DrawButton(exit_button, "Exit");
