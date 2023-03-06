@@ -366,8 +366,10 @@ void swpoP(int x,vector<Unit> &a){
         cout<<"---------------------------------------\n";
     }
 }
-void battle(vector<Unit> &x,vector<Unit> &y){
-    
+void win(int x){
+    cout<<"---------------------------------------\n";
+    cout<<"Player"<<x<<" win!!";
+    cout<<"---------------------------------------\n";
 }
 
 int main(){
@@ -397,14 +399,16 @@ int main(){
         cout<<"---------------------------------------\n";//เลือกโ
         cout<<"Player_2 Team Selection\n";
         ChoosePokemon(selected_pokemon2,pokemonNames,poke1,poke2,poke3,poke4,poke5,poke6,poke7,poke8,poke9,poke10);
-        cout<<"---------------------------------------\n";//เลือกโปรแกมอน
+        cout<<"---------------------------------------\n";//เลือกโปรแกมอ
     while(true){
         selected_pokemon2[0].showStatusforP2();
         selected_pokemon1[0].showStatusforP1();
 		char player1_action;
 		char player2_action;
-		int num1;
-		int num2;
+		int num1 = 10;
+		int num2 = 10;
+		int p1=0;
+		int p2=0;
 		cout<<"['F' Fight] ['S' Switch] ['H' Heal] What will Player1 do?  ";
 		cin>> player1_action;
 		player1_action = toupper(player1_action);
@@ -472,6 +476,11 @@ int main(){
                 cout<<selected_pokemon1[0].name<<" used move"<<num1<<"\n";
     	    }
     	    if(selected_pokemon2[0].hp == 0){
+    	        p1++;
+    	        if(p1==3){
+    	           win(1);
+    	           break;
+    	        }
     	        selected_pokemon2[0].showStatusforP2();
                 selected_pokemon1[0].showStatusforP1();
     	        selected_pokemon2[0]=decoy;
@@ -492,6 +501,13 @@ int main(){
         	        }
     	    }
     	    if(selected_pokemon1[0].hp == 0){
+    	        p2++;
+    	        if(p2==3){
+    	           win(2);
+    	           break;
+    	        } 
+    	        selected_pokemon2[0].showStatusforP2();
+                selected_pokemon1[0].showStatusforP1();
     	        selected_pokemon1[0]=decoy;
     	        cout<<"Player1 please choose new Copymon to send out\n";
     	        P1_Team(selected_pokemon1);
@@ -508,6 +524,11 @@ int main(){
                 cout<<selected_pokemon2[0].name<<" used move"<<num1<<"\n";
     	    }
     	    if(selected_pokemon1[0].hp == 0){
+    	        p2++;
+    	        if(p2==3){
+    	           win(2);
+    	           break;
+    	        }
     	        selected_pokemon2[0].showStatusforP2();
                 selected_pokemon1[0].showStatusforP1();
     	        selected_pokemon1[0]=decoy;
@@ -528,6 +549,13 @@ int main(){
         	        }
     	    }
     	    if(selected_pokemon2[0].hp == 0){
+    	        p1++;
+    	        if(p1==3){
+    	           win(1);
+    	           break;
+    	        } 
+    	        selected_pokemon2[0].showStatusforP2();
+                selected_pokemon1[0].showStatusforP1();
     	        selected_pokemon2[0]=decoy;
     	        cout<<"Player2 please choose new Copymon to send out\n";
     	        P1_Team(selected_pokemon2);
