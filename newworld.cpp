@@ -1,3 +1,4 @@
+// Online C++ compiler to run C++ program online
 #include<iostream>
 #include<string>
 #include<ctime>
@@ -166,7 +167,7 @@ int Unit::beAttacked(int oppatk,string movetype,int moveatk){
             if (type == "Fairy") dmg = moveatk+oppatk-def;
         }
     }
-    
+    if(dmg<0) dmg=-dmg;
     hp = hp - dmg;
 	if(hp <= 0) hp = 0;
 	return dmg;	
@@ -368,7 +369,7 @@ void swpoP(int x,vector<Unit> &a){
 }
 void win(int x){
     cout<<"---------------------------------------\n";
-    cout<<"Player"<<x<<" win!!";
+    cout<<"Player"<<x<<" win!!\n";
     cout<<"---------------------------------------\n";
 }
 
@@ -400,6 +401,8 @@ int main(){
         cout<<"Player_2 Team Selection\n";
         ChoosePokemon(selected_pokemon2,pokemonNames,poke1,poke2,poke3,poke4,poke5,poke6,poke7,poke8,poke9,poke10);
         cout<<"---------------------------------------\n";//เลือกโปรแกมอ
+    int p1=0;
+	int p2=0;
     while(true){
         selected_pokemon2[0].showStatusforP2();
         selected_pokemon1[0].showStatusforP1();
@@ -407,8 +410,6 @@ int main(){
 		char player2_action;
 		int num1 = 10;
 		int num2 = 10;
-		int p1=0;
-		int p2=0;
 		cout<<"['F' Fight] ['S' Switch] ['H' Heal] What will Player1 do?  ";
 		cin>> player1_action;
 		player1_action = toupper(player1_action);
