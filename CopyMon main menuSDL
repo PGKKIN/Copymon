@@ -131,11 +131,11 @@ int main(int argc, char* argv[]) {
                 break;
             case SDL_MOUSEBUTTONDOWN:
                 if (CheckCollision(event.button.x, event.button.y, start_button)) {
-                    Mix_PlayChannel(-1, sound, 0);
+                    Mix_PlayChannel(0, sound, 0);
                     game_running = true; 
                 }
                 else if (CheckCollision(event.button.x, event.button.y, exit_button)) {
-                    Mix_PlayChannel(-1, sound, 0);
+                    Mix_PlayChannel(0, sound, 0);
                     running = false;
                 }
                 break;
@@ -151,4 +151,3 @@ int main(int argc, char* argv[]) {
     QuitSDL();
     return 0;
 }
-
