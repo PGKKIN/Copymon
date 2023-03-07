@@ -1,0 +1,7 @@
+﻿  main.cpp
+D:\Project Final Compro\Copymon.exe\Pokemon\Pokemon\src\main.cpp(54,17): error C2065: 's': undeclared identifier
+D:\Project Final Compro\Copymon.exe\Pokemon\Pokemon\src\main.cpp(55,9): error C2146: syntax error: missing ';' before identifier 'SDL_DestroyRenderer'
+  test.cpp
+D:\Project Final Compro\Copymon.exe\Pokemon\Pokemon\TEST\test.cpp(54,16): error C2065: 's': undeclared identifier
+D:\Project Final Compro\Copymon.exe\Pokemon\Pokemon\TEST\test.cpp(55,5): error C2146: syntax error: missing ';' before identifier 'SDL_DestroyRenderer'
+  Generating Code...
