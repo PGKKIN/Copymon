@@ -3,6 +3,7 @@
 #include <SDL_image.h>
 #include <string>
 #include <iostream>
+#include <cstdlib>
 
 using namespace std;
 
