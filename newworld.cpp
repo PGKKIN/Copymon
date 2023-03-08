@@ -1,4 +1,3 @@
-// Online C++ compiler to run C++ program online
 #include<iostream>
 #include<string>
 #include<ctime>
@@ -404,6 +403,8 @@ int main(){
     int p1=0;
 	int p2=0;
     while(true){
+        selected_pokemon2[0].protect_on = false;
+        selected_pokemon1[0].protect_on= false;
         selected_pokemon2[0].showStatusforP2();
         selected_pokemon1[0].showStatusforP1();
 		char player1_action;
