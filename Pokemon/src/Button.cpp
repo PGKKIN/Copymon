@@ -31,3 +31,22 @@ void Button::update(Mouse& mouse) {
 void Button::draws() {
 	SDL_RenderCopy(ren, tex, &srect, &drect);
 }
+
+TTF_Font* font = TTF_OpenFont("Font/PokemonHollow.ttf", 24);
+SDL_Color white = { 255,0,255 };
+
+
+
+
+
+void DrawText(string text, int x, int y) {
+    SDL_Surface* surf = TTF_RenderText_Solid(font, text.c_str(), white);
+        SDL_Texture* Texture = SDL_CreateTextureFromSurface(ren, surf);
+        SDL_Rect rect2 = { x,y,surf->w ,surf->h };
+        SDL_FreeSurface(surf);
+        SDL_RenderCopy(ren, Texture, NULL, &rect2);
+        SDL_DestroyTexture(Texture);
+    
+}
+
+  DrawText("Hello, world!", 50, 50);
